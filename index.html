@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Assignment 1 MDIA 2294</title>
+	
+	<style>
+	    thead{
+	        font-weight:bold;
+	    }
+	    
+	    td{
+	        padding-left:5px;
+	        padding-right:5px;	        
+	    }
+	    
+	    td.sub-total{
+	        text-align:right;	        
+	    }
+	</style>
+</head>
+<body>
+	<h1>MDIA 2294: ACME Corp Invoice</h1>
+	
+	<table>
+	    <thead>
+	        <tr>
+	            <td>ITEM</td>
+	            <td>DESCRIPTION</td>
+	            <td>QTY</td>
+	            <td>PRICE</td>
+	            <td>LINE TOTAL</td>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>1</td>
+	            <td><input id="line-1-description" type="text" size="40" value="Anvil" /></td>
+	            <td><input id="line-1-quantity" type="text" size="3" value="5" /></td>
+	            <td><input id="line-1-price" type="text" size="6" value="35.00" /></td>
+	            <td class="sub-total"><span id="line-1"></span></td>
+	        </tr>
+	        <tr>
+	            <td>2</td>
+	            <td><input id="line-2-description" type="text" size="40" value="Rocket Skates (each)" /></td>
+	            <td><input id="line-2-quantity" type="text" size="3" value="2" /></td>
+	            <td><input id="line-2-price" type="text" size="6" value="24.99" /></td>
+	            <td class="sub-total"><span id="line-2"></span></td>
+	        </tr>
+	        <tr>
+	            <td>3</td>
+	            <td><input id="line-3-description" type="text" size="40" value="Giant Magnet" /></td>
+	            <td><input id="line-3-quantity" type="text" size="3" value="1" /></td>
+	            <td><input id="line-3-price" type="text" size="6" value="125.50" /></td>
+	            <td class="sub-total"><span id="line-3"></span></td>
+	        </tr>
+	        <tr>
+	            <td>4</td>
+	            <td><input id="line-4-description" type="text" size="40" value="Ball bearings" /></td>
+	            <td><input id="line-4-quantity" type="text" size="3" value="1000" /></td>
+	            <td><input id="line-4-price" type="text" size="6" value="0.25" /></td>
+	            <td class="sub-total"><span id="line-4"></span></td>
+	        </tr>
+	        <tr>
+	            <td>5</td>
+	            <td><input id="line-5-description" type="text" size="40" value="Portable holes" /></td>
+	            <td><input id="line-5-quantity" type="text" size="3" value="12" /></td>
+	            <td><input id="line-5-price" type="text" size="6" value="15.25" /></td>
+	            <td class="sub-total"><span id="line-5"></span></td>
+	        </tr>
+	    </tbody>
+	    <tfoot>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">SUB TOTAL</td>  
+	            <td class="sub-total"><span id="sub-total"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">DISCOUNT</td>  
+	            <td class="sub-total"><span id="discount"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">TAX</td>  
+	            <td class="sub-total"><span id="tax"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">TOTAL</td>  
+	            <td class="sub-total" style="border-top:solid black 1px"><span id="Total"></span></td>	        
+	        </tr>
+	    </tfoot>	    
+	</table>
+	
+	<div><button id="calculate">Calculate</button></div>
+	<div>NOTE: discounts of 10% are given to orders over $250</div>
+
+    
+
+	<!-- define script block with <script> -->
+	<script>
+        // JuKim A01381640 Assignment 1
+
+		// define calculate button as a calcBtn
+		// calcBtn is the #calculate from DOM
+		
+		const calcBtn = document.querySelector('#calculate');
+
+	
+		// define a new function called calculate 
+		
+	    function calculate() {
+
+			// Four variables are initialized to zero to store intermediate and final values during the calculation.
+			let lineTotal = 0; 
+			let subTotal = 0;
+			let discount = 0;
+			let tax = 0;
+		
+			// Item 1
+			// variable is named quantity1, its value cannot be reassigned after it's set because it's const.
+			// document.querySelector('#line-1-quantity') and ('#line-1-price') selects the HTML element with the #line-1-quantity, and #line-1-price.
+			// .value gets the chosen HTML element's current value.
+
+			const quantity1 = document.querySelector('#line-1-quantity').value;
+			const price1 = document.querySelector('#line-1-price').value;
+
+			// multiplaying the quantity1 by the price1, giving total cost for this line item.
+			lineTotal = quantity1 * price1;
+
+			// For the toFixed it has to be two Decimal points.
+			document.querySelector('#line-1').innerHTML =  "$" + lineTotal.toFixed(2); 
+
+			//To get the overall cost of all the items, this adds the lineTotal for item 1 that is now in effect to the subTotal.
+			subTotal += lineTotal;
+
+
+
+
+			// item 2
+			// variable is named quantity1, its value cannot be reassigned after it's set because it's const.
+			// document.querySelector('#line-2-quantity') and ('#line-2-price') selects the HTML element with the #line-2-quantity, and #line-2-price.
+			// .value gets the chosen HTML element's current value.
+			const quantity2 = document.querySelector('#line-2-quantity').value;
+			const price2 = document.querySelector('#line-2-price').value;
+
+			
+			// multiplaying the quantity2 by the price2, giving total cost for this line item.
+			lineTotal = quantity2 * price2;
+
+			// For the toFixed it has to be two Decimal points.
+			document.querySelector('#line-2').innerHTML =  "$" + lineTotal.toFixed(2);
+			
+			//To get the overall cost of all the items, this adds the lineTotal for item 1 that is now in effect to the subTotal.
+			subTotal += lineTotal;
+
+
+
+			// item 3
+			// variable is named quantity3, its value cannot be reassigned after it's set because it's const.
+			// document.querySelector('#line-3-quantity') and ('#line-3-price') selects the HTML element with the #line-3-quantity, and #line-3-price.
+			// .value gets the chosen HTML element's current value.
+			const quantity3 = document.querySelector('#line-3-quantity').value;
+			const price3 = document.querySelector('#line-3-price').value;
+
+			// multiplaying the quantity3 by the price3, giving total cost for this line item.
+			lineTotal = quantity3 * price3;
+
+
+			// For the toFixed it has to be two Decimal points.
+			document.querySelector('#line-3').innerHTML =  "$" + lineTotal.toFixed(2);
+
+			//To get the overall cost of all the items, this adds the lineTotal for item 1 that is now in effect to the subTotal.
+			subTotal += lineTotal;
+
+			
+			
+			// item 4
+			// variable is named quantity4, its value cannot be reassigned after it's set because it's const.
+			// document.querySelector('#line-4-quantity') and ('#line-4-price') selects the HTML element with the #line-4-quantity, and #line-4-price.
+			// .value gets the chosen HTML element's current value.
+			const quantity4 = document.querySelector('#line-4-quantity').value;
+			const price4 = document.querySelector('#line-4-price').value;
+
+			// multiplaying the quantity4 by the price4, giving total cost for this line item.
+			lineTotal = quantity4 * price4;
+
+			// For the toFixed it has to be two Decimal points.
+			document.querySelector('#line-4').innerHTML =  "$" + lineTotal.toFixed(2);
+
+			//To get the overall cost of all the items, this adds the lineTotal for item 1 that is now in effect to the subTotal.
+			subTotal += lineTotal;
+
+
+			// item 5
+			// variable is named quantity5, its value cannot be reassigned after it's set because it's const.
+			// document.querySelector('#line-5-quantity') and ('#line-5-price') selects the HTML element with the #line-5-quantity, and #line-5-price.
+			// .value gets the chosen HTML element's current value.
+			const quantity5 = document.querySelector('#line-5-quantity').value;
+			const price5 = document.querySelector('#line-5-price').value;
+
+			// multiplaying the quantity5 by the price5, giving total cost for this line item.
+			lineTotal = quantity5 * price5;
+
+			// For the toFixed it has to be two Decimal points.
+			document.querySelector('#line-5').innerHTML =  "$" + lineTotal.toFixed(2);
+
+			// To get the overall cost of all the items, this adds the lineTotal for item 1 that is now in effect to the subTotal.
+			subTotal += lineTotal;
+
+
+			// id #sub-total to display the calculated subTotal, which is the sum of all lineTotals
+			document.querySelector('#sub-total').innerHTML = "$" + subTotal.toFixed(2);
+
+			// if subTotal is greater than 250. IF it is a 10% discount is applied, calculated as subTotal * 0.1
+			if(subTotal > 250){
+				discount = subTotal * 0.1; 	 
+				}
+			
+			// #discount to display the calculated discount
+			document.querySelector('#discount').innerHTML = "$" + discount.toFixed(2);
+
+			// tax on the subTotal at a rate of 12% once the discount is applied
+			tax = (subTotal - discount) * 0.12;
+
+			// id #tax to display the calculatyed tax
+			document.querySelector('#tax').innerHTML = "$" + tax.toFixed(2);
+			
+			// at the end calculated by taking the tax from the subTotal.
+			Total = subTotal - tax;
+			
+			// #Total will show the calculated total with two decimal places displayed.
+			document.querySelector('#Total').innerHTML = "$" + Total.toFixed(2);
+	    }
+
+		// when the button is clicked, the calculate function is used.
+		calcBtn.addEventListener("click", calculate);
+
+    </script>
+</body>
+</html>
