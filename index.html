@@ -102,7 +102,14 @@
 		// calcBtn is the #calculate from DOM
 		
 		const calcBtn = document.querySelector('#calculate');
+		
+		// constant variable named taxRate
+		// The value of taxRate is set to 0.12, which likely represents a 12% tax rate.
+		const taxRate = 0.12;
 
+		// constant variable dcPercentage.
+		// The value is set to 0.10, representing a 10% discount percentage.
+		const dcPercentage = 0.10;
 	
 		// define a new function called calculate 
 		
@@ -209,22 +216,23 @@
 			// id #sub-total to display the calculated subTotal, which is the sum of all lineTotals
 			document.querySelector('#sub-total').innerHTML = "$" + subTotal.toFixed(2);
 
-			// if subTotal is greater than 250. IF it is a 10% discount is applied, calculated as subTotal * 0.1
+			// if the subTotal is greater than 250,
 			if(subTotal > 250){
-				discount = subTotal * 0.1; 	 
+				discount = subTotal * dcPercentage; 	 
 				}
 			
-			// #discount to display the calculated discount
+			// #discount to display the calculated discount, and if the condition subTotal > 250 is true this line is executed.
 			document.querySelector('#discount').innerHTML = "$" + discount.toFixed(2);
 
-			// tax on the subTotal at a rate of 12% once the discount is applied
-			tax = (subTotal - discount) * 0.12;
+			// the tax on the subtotal after any discount is applied
+			// The subtotal is first reduced by the discount, and the remaining amount is then multiplied by the tax rate to determine the total amount owed.
+			tax = (subTotal - discount) * taxRate;
 
 			// id #tax to display the calculatyed tax
 			document.querySelector('#tax').innerHTML = "$" + tax.toFixed(2);
 			
-			// at the end calculated by taking the tax from the subTotal.
-			Total = subTotal - tax;
+			// at the end calculated by taking the discount from the subTotal and add tax.
+			Total = subTotal - discount + tax;
 			
 			// #Total will show the calculated total with two decimal places displayed.
 			document.querySelector('#Total').innerHTML = "$" + Total.toFixed(2);
